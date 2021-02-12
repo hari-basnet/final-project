@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 public class Category {
@@ -20,6 +21,7 @@ public class Category {
 	@GeneratedValue
 	private int id;
 	@NotEmpty(message = "Name should not be empty")
+	@UniqueElements(message = "Name already exist")
 	private String name;
 	@Column(length = 3000)
 	@NotEmpty(message = "Description should not be empty")

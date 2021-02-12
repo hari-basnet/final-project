@@ -29,7 +29,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+	
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -39,6 +39,12 @@
               <div class="card-header">
                 <h3 class="card-title">DataTable with default features</h3>
               </div>
+              <div th:if="${message}" class="alert alert-success" role="alert">
+ <h3 th:text="${message}"></h3>
+</div>
+<div th:if = "${deleteMessage}" class="alert alert-danger" role="alert">
+   <h3 th:text="${deleteMessage}"></h3>
+</div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
@@ -65,10 +71,11 @@
 												 <a th:href = "@{/category/delete/{id}(id=${category.id})}">
 													<button
 															type="submit" class="btn btn-danger">Delete</button></a>
-															</td>
+															</td>					
                   </tr>
                  
                   </tbody>
+                  
                   <tfoot>
                   <tr>
                     <th>ID</th>

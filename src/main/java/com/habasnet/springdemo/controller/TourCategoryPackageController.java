@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.habasnet.springdemo.dto.CategoryDTO;
 import com.habasnet.springdemo.model.Category;
@@ -37,7 +38,7 @@ public class TourCategoryPackageController {
 	@PostMapping("/category")
 	public String addNewPackageCategory(@ModelAttribute("categoryDTO") @Valid CategoryDTO categoryDTO,BindingResult bindingResult, Model model,
 			@RequestParam("productImage")MultipartFile file,
-			@RequestParam("imgName")String photoName ) throws IOException {
+			@RequestParam("imgName")String photoName, RedirectAttributes redirectAttributes ) throws IOException {
 		Category category = new Category();
 		category.setId(categoryDTO.getId());
 		category.setName(categoryDTO.getName());
@@ -55,7 +56,7 @@ public class TourCategoryPackageController {
 			return "addcategory";
 		}else {
 		tourService.addPackageCategory(category);
-		model.addAttribute("msg","added successfully");
+		 redirectAttributes.addFlashAttribute("message", "Successfully added Tour Package Category!!!");
 		return "redirect:/categorylist";
 		}
 	
@@ -74,12 +75,17 @@ public class TourCategoryPackageController {
 		categoryDTO.setDescription(category.getDescription());
 		categoryDTO.setImage(category.getImage());
 		model.addAttribute("categoryDTO",categoryDTO);
+		model.addAttribute("message","Category added successfully");
 		return "addcategory";
 	}
 	@GetMapping("/category/delete/{id}")
-	public String deleteCategoryPackage(@PathVariable int id) {
+	public String deleteCategoryPackage(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
 		tourService.removeCategoryById(id);
+		redirectAttributes.addFlashAttribute("deleteMessage","Category Deleted successfully");
 		return "redirect:/categorylist";
 	}
-	
+	@GetMapping("/success")
+	public String gottoSuccess() {
+		return "success";
+	}
 }
