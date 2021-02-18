@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/common/master :: master-header">
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+
+		<div th:replace="/common/master :: navbar"></div>
+		<div th:replace="/common/master  :: asidebar"></div>
+
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>DataTables</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+	
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
+              </div>
+              <div th:if="${message}" class="alert alert-success" role="alert">
+ <h3 th:text="${message}"></h3>
+</div>
+<div th:if = "${deleteMessage}" class="alert alert-danger" role="alert">
+   <h3 th:text="${deleteMessage}"></h3>
+</div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="category : ${tourpackageCategorylist}">
+                    <td th:text="${category.id}">Trident</td>
+                    <td th:text="${category.name}">Internet
+                      Explorer 4.0
+                    </td>
+                    <td><img th:src="@{'categoryImages/'+${category.image}}" style=" width:200px; height:100px"></td>
+                    <td th:text="${category.description}"> 4</td>
+                    <td>
+                    <a th:href = "@{/category/update/{id}(id=${category.id})}">
+												<button	type="submit" class="btn btn-primary">Update</button></a>
+												 <a th:href = "@{/category/delete/{id}(id=${category.id})}">
+													<button
+															type="submit" class="btn btn-danger">Delete</button></a>
+															</td>					
+                  </tr>
+                 
+                  </tbody>
+                  
+                  <tfoot>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+		<!--  Footer -->
+		<div th:replace="/common/master :: footer"></div>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+	<!-- Scripts -->
+	<div th:replace="/common/master :: scripts"></div>
+
+</body>
+</html>

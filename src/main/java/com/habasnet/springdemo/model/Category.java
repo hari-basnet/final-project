@@ -10,19 +10,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 public class Category {
 	@Id
 	@GeneratedValue
 	private int id;
-	@NotNull(message = "Name should not be empty")
-	@Column(unique = true)
+	@NotEmpty(message = "Name should not be empty")
+	@UniqueElements(message = "Name already exist")
 	private String name;
 	@Column(length = 3000)
+	@NotEmpty(message = "Description should not be empty")
 	private String description;
 	@OneToMany(targetEntity = TourPackage.class, cascade = CascadeType.ALL )
 	@JoinColumn(name = "category_id", referencedColumnName = "id")

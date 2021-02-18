@@ -30,6 +30,8 @@
 <!-- summernote -->
 <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
 <!-- Google Font: Source Sans Pro -->
+<!-- custom CSS -->
+<link rel="stylesheet" href="dist/css/customStyle.css">
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
@@ -196,12 +198,12 @@
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="pages/layout/top-nav.html"
+								<li class="nav-item"><a th:href="@{/category}"
 									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>Add Tour Category</p>
 								</a></li>
 								<li class="nav-item"><a
-									href="pages/layout/top-nav-sidebar.html" class="nav-link">
+									th:href="@{/categorylist}" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Category List</p>
 								</a></li>
@@ -282,6 +284,39 @@
 		<script src="dist/js/pages/dashboard.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+		
+		
+		<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 	</div>
 </body>
 </html>
