@@ -1,6 +1,7 @@
 package com.habasnet.springdemo.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,27 +16,28 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.UniqueElements;
 
+
 @Entity
 public class Category {
 	@Id
 	@GeneratedValue
 	private int id;
 	@NotEmpty(message = "Name should not be empty")
-	@UniqueElements(message = "Name already exist")
 	private String name;
 	@Column(length = 3000)
 	@NotEmpty(message = "Description should not be empty")
 	private String description;
-	@OneToMany(targetEntity = TourPackage.class, cascade = CascadeType.ALL )
-	@JoinColumn(name = "category_id", referencedColumnName = "id")
-	private List<TourPackage> tourPackageList;
+//	@OneToMany(targetEntity = TourPackage.class, cascade = CascadeType.ALL )
+//	@JoinColumn(name = "category_id", referencedColumnName = "id")
+//	private List<TourPackage> tourPackageList;
 	@Column(nullable = true)
 	private String image;
 	@CreationTimestamp
 	private LocalDateTime created;
 	@UpdateTimestamp
 	private LocalDateTime updated;
-
+	@OneToMany(mappedBy = "category")
+	private List<TourPackage> tourPackages = new ArrayList<>();
 	public int getId() {
 		return id;
 	}
@@ -54,12 +56,12 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<TourPackage> getTourPackageList() {
-		return tourPackageList;
-	}
-	public void setTourPackageList(List<TourPackage> tourPackageList) {
-		this.tourPackageList = tourPackageList;
-	}
+//	public List<TourPackage> getTourPackageList() {
+//		return tourPackageList;
+//	}
+//	public void setTourPackageList(List<TourPackage> tourPackageList) {
+//		this.tourPackageList = tourPackageList;
+//	}
 	
 	public String getImage() {
 		return image;
@@ -78,6 +80,12 @@ public class Category {
 	}
 	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
+	}
+	public List<TourPackage> getTourPackages() {
+		return tourPackages;
+	}
+	public void setTourPackages(List<TourPackage> tourPackages) {
+		this.tourPackages = tourPackages;
 	}
 	
 

@@ -29,4 +29,5 @@ public class TourCategoryPackageService {
 	public void removeCategoryById(int id) {
 		tourRepo.deleteById(id);
 	}
+	
 }

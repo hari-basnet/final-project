@@ -1,16 +1,14 @@
-package com.habasnet.springdemo.model;
+package com.habasnet.springdemo.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -19,8 +17,12 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity
-public class TourPackage {
+import com.habasnet.springdemo.model.Category;
+import com.habasnet.springdemo.model.Itinerary;
+import com.habasnet.springdemo.model.Location;
+import com.habasnet.springdemo.model.TourPackageOption;
+
+public class TourPackageDTO {
 	@Id
 	@GeneratedValue
 	private int id;
@@ -37,25 +39,14 @@ public class TourPackage {
 	private String exclude;
 	@Column(nullable = true)
 	private String image;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id")
-	private Category category;
-	
+	private int categoryId;
 	@CreationTimestamp
 	private LocalDateTime created;
 	@UpdateTimestamp
 	private LocalDateTime updated;
-	@OneToMany(mappedBy = "tourPackage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Itinerary> itineraryList;
-	
-	@OneToMany(targetEntity = Location.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "tourpackage_id",referencedColumnName = "id")
 	private List<Location> locationList;
-	@OneToMany(targetEntity = TourPackageOption.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "tourpackage_id",referencedColumnName = "id")
 	private List<TourPackageOption> tourPackageOptionsList;
-	
 	public int getId() {
 		return id;
 	}
@@ -74,7 +65,6 @@ public class TourPackage {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 	public Long getCost() {
 		return cost;
 	}
@@ -129,13 +119,12 @@ public class TourPackage {
 	public void setTourPackageOptionsList(List<TourPackageOption> tourPackageOptionsList) {
 		this.tourPackageOptionsList = tourPackageOptionsList;
 	}
-	public Category getCategory() {
-		return category;
+	public int getCategoryId() {
+		return categoryId;
 	}
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 	
 	
-
 }

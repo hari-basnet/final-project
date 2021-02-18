@@ -52,17 +52,17 @@
 								th:object="${categoryDTO}" enctype="multipart/form-data">
 								
 								<div class="card-body">
-									<div class="form-group">
-										<label for="name">Package Category Name</label> <input
+									<div class="form-group" >
+										<label for="name" >Package Category Name</label> <input
 											type="text" id="name" class="form-control" th:field="*{name}"
-											name="name"> <span
+											name="name" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''"> <span
 											th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-											th:errorclass="error"></span>
+											th:errorclass="error" ></span>
 									</div>
 									<div class="form-group">
 										<label for="description">Description</label>
 										<textarea id="description" class="form-control" rows="4"
-											th:field="*{description}" name="description"> </textarea>
+											th:field="*{description}" name="description" th:classappend="${#fields.hasErrors('description')} ? 'is-invalid' : ''"> </textarea>
 										<span th:if="${#fields.hasErrors('description')}"
 											th:errors="*{description}" th:errorclass="error"></span>
 

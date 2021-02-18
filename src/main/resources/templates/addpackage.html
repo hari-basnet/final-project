@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/common/master :: master-header">
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+
+		<div th:replace="/common/master :: navbar"></div>
+		<div th:replace="/common/master  :: asidebar"></div>
+
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>Add Tour Package</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active">Package Add</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">Category Package</h3>
+
+								<div class="card-tools">
+									<button type="button" class="btn btn-tool"
+										data-card-widget="collapse" data-toggle="tooltip"
+										title="Collapse">
+										<i class="fas fa-minus"></i>
+									</button>
+								</div>
+							</div>
+
+							<form th:action="@{/package}" method="POST"
+								th:object="${tourPackageDTO}" enctype="multipart/form-data">
+				<input type="hidden"	name="id" th:field="*{id}" />
+										
+								<div class="card-body">
+									<div class="form-group">
+										<label for="category">Package Category </label>
+										<select class="form-control" th:field="*{categoryId}" name ="categoryId" id="category"   >
+										
+										<option th:each="category : ${categoryPackage}"
+										 th:text = "${category.name}" 
+										 th:value="${category.id}">
+											
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="name">Package Name</label> <input type="text"
+											id="name" class="form-control" th:field="*{name}" name="name"
+											th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+										<span th:if="${#fields.hasErrors('name')}" th:errors ="*{name}"
+											th:errorclass="error"></span>
+									</div>
+									<section class="content">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="card card-outline card-info" >
+													<div class="card-header">
+														<h3 class="card-title">Package Description</h3>
+														<!-- tools box -->
+														<div class="card-tools">
+															<button type="button" class="btn btn-tool btn-sm"
+																data-card-widget="collapse" data-toggle="tooltip"
+																title="Collapse" style="color: black;">
+																<i class="fas fa-minus"></i>
+															</button>
+															<button type="button" class="btn btn-tool btn-sm"
+																data-card-widget="remove" data-toggle="tooltip"
+																title="Remove" style="color: black;">
+																<i class="fas fa-times"></i>
+															</button>
+														</div>
+														<!-- /. tools -->
+													</div>
+													<!-- /.card-header -->
+													<div class="card-body pad">
+														<div class="mb-3">
+															<textarea class="textarea"
+																placeholder="Place some text here"
+																style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+																th:field="*{description}" name="description"
+																th:classappend="${#fields.hasErrors('description')} ? 'is-invalid' : ''"></textarea>
+															<span th:if="${#fields.hasErrors('description')}"
+																th:errors="*{include}" th:errorclass="error"></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /.col-->
+										</div>
+										<!-- ./row -->
+									</section>
+									<!-- /.content -->
+									<!-- <div class="form-group">
+										<label for="description">Description</label>
+										<textarea id="description" class="form-control" rows="4"
+											th:field="*{description}" name="description"
+											th:classappend="${#fields.hasErrors('description')} ? 'is-invalid' : ''"> </textarea>
+										<span th:if="${#fields.hasErrors('description')}"
+											th:errors="*{description}" th:errorclass="error"></span>
+
+									</div> -->
+									<!-- 	<div class="form-group">
+										<label for="exclude">Package Exclude</label> <input
+											type="text" id="exclude" class="form-control"
+											th:field="*{exclude}" name="exclude"
+											th:classappend="${#fields.hasErrors('exclude')} ? 'is-invalid' : ''">
+										<span th:if="${#fields.hasErrors('exclude')}"
+											th:errors="*{exclude}" th:errorclass="error"></span>
+									</div>
+									<div class="form-group">
+										<label for="include">Package Include</label> <input
+											type="text" id="include" class="form-control"
+											th:field="*{include}" name="include"
+											th:classappend="${#fields.hasErrors('include')} ? 'is-invalid' : ''">
+										<span th:if="${#fields.hasErrors('include')}"
+											th:errors="*{include}" th:errorclass="error"></span>
+
+
+									</div> -->
+									<!-- Main content -->
+									<section class="content" th:classappend="${#fields.hasErrors('include')} ? 'is-invalid' : ''">
+										<div class="row">
+											<div class="col-md-12" >
+												<div class="card card-outline card-info" >
+													<div class="card-header">
+														<h3 class="card-title">Package Include</h3>
+														<!-- tools box -->
+														<div class="card-tools">
+															<button type="button" class="btn btn-tool btn-sm"
+																data-card-widget="collapse" data-toggle="tooltip"
+																title="Collapse" style="color: black;">
+																<i class="fas fa-minus"></i>
+															</button>
+															<button type="button" class="btn btn-tool btn-sm"
+																data-card-widget="remove" data-toggle="tooltip"
+																title="Remove" style="color: black;">
+																<i class="fas fa-times"></i>
+															</button>
+														</div>
+														<!-- /. tools -->
+													</div>
+													<!-- /.card-header -->
+													<div class="card-body pad" >
+														<div class="mb-3">
+															<textarea class="textarea"
+																placeholder="Place some text here"
+																style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+																name="include" th:field="*{include}"
+																th:classappend="${#fields.hasErrors('include')} ? 'is-invalid' : ''"></textarea>
+															<span th:if="${#fields.hasErrors('include')}"
+																th:errors="*{include}" th:errorclass="error"></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /.col-->
+										</div>
+										<!-- ./row -->
+									</section>
+									<!-- /.content -->
+									<!-- Main content -->
+									<section class="content">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="card card-outline card-info">
+													<div class="card-header">
+														<h3 class="card-title">Package Exclude</h3>
+														<!-- tools box -->
+														<div class="card-tools">
+															<button type="button" class="btn btn-tool btn-sm"
+																data-card-widget="collapse" data-toggle="tooltip"
+																title="Collapse" style="color: black;">
+																<i class="fas fa-minus"></i>
+															</button>
+															<button type="button" class="btn btn-tool btn-sm"
+																data-card-widget="remove" data-toggle="tooltip"
+																title="Remove" style="color: black;">
+																<i class="fas fa-times"></i>
+															</button>
+														</div>
+														<!-- /. tools -->
+													</div>
+													<!-- /.card-header -->
+													<div class="card-body pad">
+														<div class="mb-3">
+															<textarea class="textarea"
+																placeholder="Place some text here"
+																style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+																name="exclude" th:field="*{exclude}"
+																th:classappend="${#fields.hasErrors('exclude')} ? 'is-invalid' : ''"></textarea>
+															<span th:if="${#fields.hasErrors('exclude')}"
+																th:errors="*{exclude}" th:errorclass="error"></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /.col-->
+										</div>
+										<!-- ./row -->
+									</section>
+									<!-- /.content -->
+									<div class="form-group">
+										<label for="name">Package Cost</label> <input type="number"
+											id="cost" class="form-control" th:field="*{cost}" name="cost"
+											th:classappend="${#fields.hasErrors('cost')} ? 'is-invalid' : ''">
+										<span th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}"
+											th:errorclass="error"></span>
+									</div>
+									<div class="form-group">
+										<label for="photo">Image</label>
+										<div class="input-group">
+											<div class="custom-file">
+												<input type="file" class="custom-file-input"
+													accept="image/jpeg, image/png" name="productImage"
+													id="productImage" /> <label class="custom-file-label"
+													for="photo">Choose file</label>
+											</div>
+										</div>
+									</div>
+									<input type="hidden" name="imgName"
+										th:value="${tourPackageDTO.image}" /> 
+										
+									<div class="card-footer">
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</div>
+								</div>
+								<!-- /.card-body -->
+
+							</form>
+
+						</div>
+						<!-- /.card -->
+					</div>
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!--  Footer -->
+		<div th:replace="/common/master :: footer"></div>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+	<!-- Scripts -->
+	<div th:replace="/common/master :: scripts"></div>
+
+</body>
+</html>
